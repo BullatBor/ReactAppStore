@@ -1,8 +1,9 @@
 const Router = require('express');
+const typeController = require('../controllers/typeController');
 const router = new Router();
 
-router.post('/registration',)
-router.post('/login');
-router.get('/auth');
+
+router.post('/', typeController.create)
+router.get('/', typeController.getAll);
 
 module.exports = router;

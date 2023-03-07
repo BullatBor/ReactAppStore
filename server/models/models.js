@@ -1,12 +1,11 @@
-const sequelize = require('../db');
-const {DataTypes} = require('sequelize');
+const sequelize = require('../db')
+const {DataTypes} = require('sequelize')
 
 const User = sequelize.define('user', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     email: {type: DataTypes.STRING, unique: true,},
     password: {type: DataTypes.STRING},
-    role: {type: DataTypes.STRING, defaultValue: 'USER'}
- 
+    role: {type: DataTypes.STRING, defaultValue: "USER"},
 })
 
 const Basket = sequelize.define('basket', {
@@ -37,49 +36,48 @@ const Brand = sequelize.define('brand', {
 
 const Rating = sequelize.define('rating', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    name: {type: DataTypes.INTEGER, allowNull: false},
+    rate: {type: DataTypes.INTEGER, allowNull: false},
 })
 
 const DeviceInfo = sequelize.define('device_info', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title: {type: DataTypes.STRING, allowNull: false},
-    description: {type: DataTypes.STRING, allowNull: false}
+    description: {type: DataTypes.STRING, allowNull: false},
 })
-
 
 const TypeBrand = sequelize.define('type_brand', {
-    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
-// Выстраивание взаимосвязи между таблицами
-User.hasOne(Basket);//один к одному
-Basket.belongsTo(User); //принадлежит User
 
-User.hasMany(Rating);//ко многим
-Rating.belongsTo(User);//принадлежит User
+User.hasOne(Basket)
+Basket.belongsTo(User)
 
-Basket.hasMany(BasketDevice);
-BasketDevice.belongsTo(Basket);
+User.hasMany(Rating)
+Rating.belongsTo(User)
 
-Type.hasMany(Device);
-Device.belongsTo(Type);
+Basket.hasMany(BasketDevice)
+BasketDevice.belongsTo(Basket)
 
-Brand.hasMany(Device);
-Device.belongsTo(Brand);
+Type.hasMany(Device)
+Device.belongsTo(Type)
 
-Device.hasMany(Rating);
-Rating.belongsTo(Device);
+Brand.hasMany(Device)
+Device.belongsTo(Brand)
 
-Device.hasMany(BasketDevice);
-BasketDevice.belongsTo(Device);
+Device.hasMany(Rating)
+Rating.belongsTo(Device)
 
-Device.hasMany(DeviceInfo);
-DeviceInfo.belongsTo(Device);
+Device.hasMany(BasketDevice)
+BasketDevice.belongsTo(Device)
 
-Type.belongsToMany(Brand, {through: TypeBrand}); //Много ко многим
-Brand.belongsToMany(Type, {through: TypeBrand}); //Много ко многим
+Device.hasMany(DeviceInfo, {as: 'info'});
+DeviceInfo.belongsTo(Device)
 
-module.exports = (
+Type.belongsToMany(Brand, {through: TypeBrand })
+Brand.belongsToMany(Type, {through: TypeBrand })
+
+module.exports = {
     User,
     Basket,
     BasketDevice,
@@ -89,4 +87,8 @@ module.exports = (
     Rating,
     TypeBrand,
     DeviceInfo
-)
+}
+
+
+
+
