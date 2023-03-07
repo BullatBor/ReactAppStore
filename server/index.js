@@ -6,12 +6,14 @@ const cors = require('cors');//для отправления запроса с �
 const router = require('./routes/index');
 const errorHandler = require('./middleware/ErrorHandlingMiddleWare')
 const fileUpload = require('express-fileupload');
+const path = require("path")
 
 const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static(path.resolve(__dirname, 'static')));
 app.use(fileUpload({}));//Для работы с файлами, в данном случаи фото товара
 app.use('/api', router); // "api/ПУТЬ из routes"
 
