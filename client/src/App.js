@@ -1,3 +1,8 @@
+//axios чтобы отправлять запросы на сервер
+//react-router-dom для постраничной навигации
+//mobx стэйт менеджер
+//mobx-react-lite чтобы связать mobx с компонентами  react
+
 import logo from './logo.svg';
 import './App.css';
 
