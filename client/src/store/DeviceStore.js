@@ -11,24 +11,33 @@ export default class DeviceStore {
             {id: 2, name: 'Apple'}
         ]
         this._devices = [
-            {id: 1, name: 'Iphone 12 pro', price: 25000, rating: 5, img: ''},
-            {id: 2, name: 'Apple'}
+            {id: 1, name: 'Iphone 12 pro', price: 25000, rating: 5, img: 'https://www.ixbt.com/img/n1/news/2021/3/6/iPhone-12-Zach-Griff-8_large_large_large.jpeg'},
+            {id: 2, name: 'Iphone 12 pro', price: 25000, rating: 5, img: 'https://www.ixbt.com/img/n1/news/2021/3/6/iPhone-12-Zach-Griff-8_large_large_large.jpeg'},
+            {id: 3, name: 'Iphone 12 pro', price: 25000, rating: 5, img: 'https://www.ixbt.com/img/n1/news/2021/3/6/iPhone-12-Zach-Griff-8_large_large_large.jpeg'},
+            {id: 4, name: 'Iphone 12 pro', price: 25000, rating: 5, img: 'https://www.ixbt.com/img/n1/news/2021/3/6/iPhone-12-Zach-Griff-8_large_large_large.jpeg'}
+
         ]
         makeAutoObservable(this)
     }
 
-    setIsAuth(bool) {
-        this._isAuth = bool;
+    setTypes(types) {
+        this._types =types;
     }
-    setUser(user) {
-        this._user = user;
+    setBrands(brands) {
+        this._brands = brands;
+    }
+    setDevices(devices) {
+        this._devices = devices;
     }
 
-    get isAuth() {
-        return this._isAuth;
+    get types() {
+        return this._types;
     }
-    get user(){
-        return this._user;
+    get brands(){
+        return this._brands;
+    } 
+    get devices(){
+        return this._devices;
     } 
     
 }
