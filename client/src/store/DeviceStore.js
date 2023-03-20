@@ -2,7 +2,7 @@ import {makeAutoObservable} from 'mobx';
 
 export default class DeviceStore {
     constructor() {
-        this._type = [
+        this._types = [
             {id: 1, name: 'Холодильник'},
             {id: 2, name: 'Смартфоны'}
         ]
@@ -14,9 +14,13 @@ export default class DeviceStore {
             {id: 1, name: 'Iphone 12 pro', price: 25000, rating: 5, img: 'https://www.ixbt.com/img/n1/news/2021/3/6/iPhone-12-Zach-Griff-8_large_large_large.jpeg'},
             {id: 2, name: 'Iphone 12 pro', price: 25000, rating: 5, img: 'https://www.ixbt.com/img/n1/news/2021/3/6/iPhone-12-Zach-Griff-8_large_large_large.jpeg'},
             {id: 3, name: 'Iphone 12 pro', price: 25000, rating: 5, img: 'https://www.ixbt.com/img/n1/news/2021/3/6/iPhone-12-Zach-Griff-8_large_large_large.jpeg'},
-            {id: 4, name: 'Iphone 12 pro', price: 25000, rating: 5, img: 'https://www.ixbt.com/img/n1/news/2021/3/6/iPhone-12-Zach-Griff-8_large_large_large.jpeg'}
+            {id: 4, name: 'Iphone 12 pro', price: 25000, rating: 5, img: 'https://www.ixbt.com/img/n1/news/2021/3/6/iPhone-12-Zach-Griff-8_large_large_large.jpeg'},
+            {id: 5, name: 'Iphone 12 pro', price: 25000, rating: 5, img: 'https://www.ixbt.com/img/n1/news/2021/3/6/iPhone-12-Zach-Griff-8_large_large_large.jpeg'},
+            {id: 6, name: 'Iphone 12 pro', price: 25000, rating: 5, img: 'https://www.ixbt.com/img/n1/news/2021/3/6/iPhone-12-Zach-Griff-8_large_large_large.jpeg'}
 
         ]
+        this._selectedType = {}//хранение выделенного типа
+        this._selectedBrand = {} //хранение выделенного брэнда
         makeAutoObservable(this)
     }
 
@@ -30,6 +34,13 @@ export default class DeviceStore {
         this._devices = devices;
     }
 
+    setSelectedType(type){ //Выделение конткретного типа при нажатии
+        this._selectedType = type;
+    }
+    setSelectedBrand(brand){ //Выделение конткретного брэнда при нажатии
+        this._selectedBrand = brand;
+    }
+
     get types() {
         return this._types;
     }
@@ -39,5 +50,12 @@ export default class DeviceStore {
     get devices(){
         return this._devices;
     } 
+
+    get selectedType(){
+        return this._selectedType;
+    }
+    get selectedBrand(){
+        return this._selectedBrand;
+    }
     
 }
