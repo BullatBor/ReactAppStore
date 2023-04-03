@@ -5,12 +5,14 @@ import jwt_decode from "jwt-decode"; //для декодирование ток�
 export const registration = async (email, password) => {
     const {data} = await $host.post('api/user/registration', {email, password, role: "ADMIN"})
      localStorage.setItem('token', data.token)   //сохраняем токен
+     localStorage.setItem('UserId', jwt_decode(data.token).id) //сохраняем ID пользователя
     return jwt_decode(data.token)//результат декодирования токена
 }
 
 export const login = async (email, password) => {
     const {data} = await $host.post('api/user/login', {email, password})
     localStorage.setItem('token', data.token)
+    localStorage.setItem('UserId', jwt_decode(data.token).id)
     return jwt_decode(data.token)//результат декодирования токена
 }
 
@@ -19,3 +21,4 @@ export const check = async () => {
     localStorage.setItem('token', data.token)
     return jwt_decode(data.token)//результат декодирования токена
 }
+

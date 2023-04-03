@@ -5,7 +5,7 @@ import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import {Button} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
-import { ADMIN_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
 import {observer} from "mobx-react-lite"; //чтобы рисовалось в режиме реального времени
 import { useNavigate } from 'react-router-dom';
 
@@ -24,6 +24,7 @@ const NavBar = observer(() => {
           {user.isAuth ?
             <Nav className="me-auto" style = {{color:"white"}}>
                 <Button variant={"outline-light"} onClick={() => route(ADMIN_ROUTE)}>Админ панель</Button>
+                <Button variant={"outline-light"} onClick={() => route(BASKET_ROUTE)} style={{marginLeft: 4}} className="ml-4">Корзина</Button>
                 <Button variant={"outline-light"} onClick={() => logOut()} style={{marginLeft: 4}} className="ml-4">Выйти</Button>
             </Nav>
             :

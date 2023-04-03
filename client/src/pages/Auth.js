@@ -11,7 +11,6 @@ const Auth = observer(() => {
   const {user} = useContext(Context)
   const location = useLocation();
   const navigator = useNavigate();
-  //const isLogin = true;
   const isLogin = location.pathname === LOGIN_ROUTE//если маршрут совпадает с LOGIN_ROUTE
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('')

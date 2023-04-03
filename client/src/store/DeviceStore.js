@@ -5,14 +5,19 @@ export default class DeviceStore {
         this._types = []
         this._brands = []
         this._devices = []
+        this._basketDevices = []
         this._selectedType = {}//хранение выделенного типа
         this._selectedBrand = {} //хранение выделенного брэнда
+        this._selectedBasketDevice = {} //хранение девайсов в корзине
         this._page = 1
         this._totalCount = 8
         this._limit = 3
         makeAutoObservable(this)
     }
 
+    setBasketDevices(device) {
+        this._basketDevices = device
+    }
     setTypes(types) {
         this._types = types
     }
@@ -46,6 +51,9 @@ export default class DeviceStore {
     }
     get devices() {
         return this._devices
+    }
+    get basket() {
+        return this._basketDevices
     }
     get selectedType() {
         return this._selectedType
