@@ -9,6 +9,8 @@ export default class DeviceStore {
         this._selectedType = {}//хранение выделенного типа
         this._selectedBrand = {} //хранение выделенного брэнда
         this._selectedBasketDevice = {} //хранение девайсов в корзине
+        this._priceDevices = 0
+        this._TotalPrice = 0;
         this._page = 1
         this._totalCount = 8
         this._limit = 3
@@ -27,7 +29,9 @@ export default class DeviceStore {
     setDevices(devices) {
         this._devices = devices
     }
+    setPriceAllDevices(price) {
 
+    }
     setSelectedType(type) {
         this.setPage(1)
         this._selectedType = type
@@ -51,6 +55,9 @@ export default class DeviceStore {
     }
     get devices() {
         return this._devices
+    }
+    get price() {
+        return this._priceDevices
     }
     get basket() {
         return this._basketDevices
