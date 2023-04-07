@@ -1,46 +1,33 @@
-import React, { useContext, useEffect } from 'react'
+import { observer } from 'mobx-react-lite';
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Card, Col } from 'react-bootstrap'
 import { Context } from '../..';
 import { fetchBasket, fetchDevices } from '../../http/deviceAPI';
+import { CreateBrand } from '../modals/CreateBrand';
+import { ShopCard } from '../modals/ShopCard';
 
-export const PriceCard = () => {
-    const {device} = useContext(Context);
-    let TotalPrice = 0;
-    let TotalCount = 0;   
-    const result = { TotalPrice, TotalCount };
-    device.devices.forEach(deviceId => {
-        device.basket.forEach(basketId => {
-          if (deviceId.id === basketId.deviceId) {
-            result.TotalPrice += deviceId.price;
-            result.TotalCount += 1;
-          }
-        });
-      });
-      const basketId = localStorage.getItem('UserId')
-    useEffect(() => {
-      fetchBasket(basketId).then(data => {
-        device.setBasketDevices(data) 
-      })
-    },[])
+export const PriceCard = observer(({AllCount, AllPrice}) => {
+    const [ShopCardVisible, setShopCardVisible] = useState(false);
   return (
-    <Col md={1} className = {"mt-3 mb-2"} >
+    <Col md={1} className = {"mt-3 mb-2 position-fixed"} > 
             <Card style={{width:400, boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)", justifyContent: 'center', padding:20}} border={"light"} >
                 <div>
                     <div className='text-black-50 mt-1 d-flex justify-content-between align-items-center'>
-                        <div>Товары, {result.TotalCount} шт.</div>
+                        <div>Товары, {AllCount} шт.</div>
                         <div className='d-flex align-items-center'>
-                        {result.TotalPrice} руб.
+                        {AllPrice} руб.
                         </div>
                         </div>
                         <div className='text-black-50 mt-1 d-flex justify-content-between align-items-center'>
                         <div><h3>Итого</h3></div>
                         <div className='d-flex align-items-center'>
-                        <h4>{result.TotalPrice} руб.</h4>
+                        <h4>{AllPrice} руб.</h4>
                         </div>
                     </div>
-                    <Button className = {"mt-3"} variant={"success"} onClick={() => console.log("work")}>Заказать</Button>
+                    <Button className = {"mt-3"} variant={"success"} onClick={() => setShopCardVisible(true)}>Заказать</Button>
                 </div>
             </Card>            
+            <ShopCard show={ShopCardVisible} onHide={() => setShopCardVisible(false)}/>
         </Col>
   )
-}
+})

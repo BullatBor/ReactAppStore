@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useMemo } from 'react'
 import { Button, Col, Container, Row } from 'react-bootstrap'
 import { Context } from '..';
 import { PriceCard } from '../components/Basket/PriceCard';
@@ -13,6 +13,24 @@ const Basket = observer(() => {
   const Navigator = useNavigate();
   const {device} = useContext(Context);
   const basketId = localStorage.getItem('UserId')
+  const memoizedValues = useMemo(() => {
+    let TotalPrice = 0;
+    let TotalCount = 0;
+  
+    device.basket.forEach(basketId => {
+      device.devices.forEach(deviceId => {
+        if (deviceId.id === basketId.deviceId) {
+          TotalPrice += deviceId.price;
+          TotalCount += 1;
+        }
+      });
+    });
+    return {
+      TotalPrice,
+      TotalCount,
+    };
+  }, [device.basket]);
+  const { TotalPrice, TotalCount} = memoizedValues;
   useEffect(() => {
     fetchBasket(basketId).then(data => {
       device.setBasketDevices(data) 
@@ -22,7 +40,8 @@ const Basket = observer(() => {
       device.setTotalCount(data.count)
       }
       )
-  }, [])
+//1241
+  }, [device])
   return (
     <Container>
       <Row>
@@ -32,7 +51,7 @@ const Basket = observer(() => {
             <BasketList/>
         </Col>
         <Col md={2}>
-            <PriceCard/>
+            <PriceCard AllCount={TotalCount} AllPrice={TotalPrice}/>
         </Col>
         </>)
           :

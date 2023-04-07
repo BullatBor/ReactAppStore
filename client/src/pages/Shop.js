@@ -6,10 +6,11 @@ import BrandBar from '../components/BrandBar'
 import DeviceList from '../components/DeviceList'
 import { Pages } from '../components/Pages'
 import TypeBar from '../components/TypeBar'
-import { fetchBrands, fetchDevices, fetchTypes } from '../http/deviceAPI'
+import { fetchBasket, fetchBrands, fetchDevices, fetchTypes } from '../http/deviceAPI'
 
 const Shop = observer(() => {
   const {device} = useContext(Context);
+  const basketId = localStorage.getItem('UserId')
 
   useEffect(() => {
     fetchTypes().then(
@@ -23,6 +24,9 @@ const Shop = observer(() => {
       device.setTotalCount(data.count)
       }
       )
+      fetchBasket(basketId).then(data => {
+        device.setBasketDevices(data) 
+      })
   }, [])//единожды при открытии Shop
 
   useEffect(() => {
@@ -31,6 +35,9 @@ const Shop = observer(() => {
       device.setTotalCount(data.count)
       }
       )
+      fetchBasket(basketId).then(data => {
+        device.setBasketDevices(data) 
+      })
   }, [device.page, device.selectedType, device.selectedBrand])
   return (
     <Container>

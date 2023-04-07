@@ -3,11 +3,12 @@ import { Context } from '..'
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-import {Button} from "react-bootstrap";
+import {Button, Image} from "react-bootstrap";
 import {NavLink} from "react-router-dom";
 import { ADMIN_ROUTE, BASKET_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
 import {observer} from "mobx-react-lite"; //чтобы рисовалось в режиме реального времени
 import { useNavigate } from 'react-router-dom';
+import Basket from "../assets/Basket.svg"
 
 const NavBar = observer(() => {
     const {user} = useContext(Context);
@@ -24,7 +25,7 @@ const NavBar = observer(() => {
           {user.isAuth ?
             <Nav className="me-auto" style = {{color:"white"}}>
                 <Button variant={"outline-light"} onClick={() => route(ADMIN_ROUTE)}>Админ панель</Button>
-                <Button variant={"outline-light"} onClick={() => route(BASKET_ROUTE)} style={{marginLeft: 4}} className="ml-4">Корзина</Button>
+                <Image widht={35} height={35} src={Basket} onClick={() => route(BASKET_ROUTE)} style={{cursor:"pointer", filter: 'brightness(1)'}} className="ml-4" />
                 <Button variant={"outline-light"} onClick={() => logOut()} style={{marginLeft: 4}} className="ml-4">Выйти</Button>
             </Nav>
             :

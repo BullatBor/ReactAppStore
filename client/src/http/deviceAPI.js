@@ -57,3 +57,8 @@ export const removeDeviceFromBasket = async (device) => {
     const {data} = await $host.post('api/basket_device/remove', device)
     return data;
 }
+
+export const removeAllDevice = async (device) => { 
+    const {data} = await $host.post('api/basket_device/removeAll', device)
+    return data;
+}

@@ -21,7 +21,7 @@ export const publicRoutes = [//Должны отрисовываться в лю
         path: SHOP_ROUTE,
         Component: <Shop/>
     },
-    {
+    { 
         path: LOGIN_ROUTE,
         Component: <Auth/>
     },

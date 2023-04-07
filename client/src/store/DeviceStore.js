@@ -10,11 +10,30 @@ export default class DeviceStore {
         this._selectedBrand = {} //хранение выделенного брэнда
         this._selectedBasketDevice = {} //хранение девайсов в корзине
         this._priceDevices = 0
-        this._TotalPrice = 0;
         this._page = 1
         this._totalCount = 8
         this._limit = 3
         makeAutoObservable(this)
+    }
+    setPlusPrice(price){
+        this._TotalPrice = this._TotalPrice + price;
+    }
+    setAllPrice(price){
+        this._TotalPrice = price;
+    }
+    setMinusPrice(price){
+        this._TotalPrice = this._TotalPrice - price;
+    }
+
+    setPlusCount(count){
+        this._TotalBasketCount = this._TotalBasketCount + count;
+    }
+    setAllCount(count){
+        this._TotalBasketCount = count;
+    }
+    
+    setMinusCount(count){
+        this._TotalBasketCount = this._TotalBasketCount - count;
     }
 
     setBasketDevices(device) {
@@ -29,9 +48,7 @@ export default class DeviceStore {
     setDevices(devices) {
         this._devices = devices
     }
-    setPriceAllDevices(price) {
 
-    }
     setSelectedType(type) {
         this.setPage(1)
         this._selectedType = type
@@ -46,7 +63,12 @@ export default class DeviceStore {
     setTotalCount(count) {
         this._totalCount = count
     }
-
+    get AllPrice(){
+        return this._TotalPrice
+    }
+    get CountDevices(){
+        return this._TotalBasketCount
+    }
     get types() {
         return this._types
     }

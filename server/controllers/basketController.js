@@ -6,7 +6,8 @@ class BasketController {
     async  create(req, res) {
         let {basketId, deviceId} = req.body
         const devices = await BasketDevice.create({basketId, deviceId})
-        return res.json(devices)
+        const Alldevices = await BasketDevice.findAll({ where:{ basketId: basketId}});
+        return res.json(Alldevices)
     }
     async  getBasketId(req, res) {
         const {basketId} = req.query
@@ -23,6 +24,12 @@ class BasketController {
           await BasketDevice.destroy({ where: { id: deviceToDelete.id } }); 
         const devices = await BasketDevice.findAll({ where:{ basketId: basketId}});
         return res.json(devices); 
+    }
+    async  removeAllDevice(req, res) { 
+        const {basketId, deviceId} = req.body
+          await BasketDevice.destroy({ where: { deviceId: deviceId }}); 
+        const devices = await BasketDevice.findAll({ where:{ basketId: basketId}});
+        return res.json(devices);  
     }
 }
  
