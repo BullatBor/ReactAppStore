@@ -18,7 +18,7 @@ const Shop = observer(() => {
     fetchBrands().then( 
       data =>  device.setBrands(data)
       )
-    fetchDevices(null, null, 1, 3).then(
+    fetchDevices(null, null, 1, 10).then(
       data =>  {device.setDevices(data.rows)
       device.setTotalCount(data.count)
       }
@@ -26,7 +26,7 @@ const Shop = observer(() => {
   }, [])//единожды при открытии Shop
 
   useEffect(() => {
-    fetchDevices(device.selectedType.id, device.selectedBrand.id, device.page, 2).then(
+    fetchDevices(device.selectedType.id, device.selectedBrand.id, device.page, 10).then(
       data =>  {device.setDevices(data.rows)
       device.setTotalCount(data.count)
       }

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { Button, Card, Col } from 'react-bootstrap'
 import { Context } from '../..';
-import { fetchDevices } from '../../http/deviceAPI';
+import { fetchBasket, fetchDevices } from '../../http/deviceAPI';
 
 export const PriceCard = () => {
     const {device} = useContext(Context);
@@ -16,6 +16,12 @@ export const PriceCard = () => {
           }
         });
       });
+      const basketId = localStorage.getItem('UserId')
+    useEffect(() => {
+      fetchBasket(basketId).then(data => {
+        device.setBasketDevices(data) 
+      })
+    },[])
   return (
     <Col md={1} className = {"mt-3 mb-2"} >
             <Card style={{width:400, boxShadow: "2px 2px 4px rgba(0, 0, 0, 0.25)", justifyContent: 'center', padding:20}} border={"light"} >

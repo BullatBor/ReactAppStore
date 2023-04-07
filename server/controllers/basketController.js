@@ -22,7 +22,7 @@ class BasketController {
           });
           await BasketDevice.destroy({ where: { id: deviceToDelete.id } }); 
         const devices = await BasketDevice.findAll({ where:{ basketId: basketId}});
-        return res.json(devices);
+        return res.json(devices); 
     }
 }
  
